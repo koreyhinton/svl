@@ -1,0 +1,5 @@
+*~
+build/
+dist/
+svllib.egg-info/
+MANIFEST
