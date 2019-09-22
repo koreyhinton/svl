@@ -3,3 +3,5 @@ build/
 dist/
 svllib.egg-info/
 MANIFEST
+.*
+__pycache__

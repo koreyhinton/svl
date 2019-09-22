@@ -71,8 +71,9 @@ def _parse_el_attr_val(s, i, l, els):
     i += 1
     while i<l and s[i] != '\n':
         i += 1
-    if i<l and s[i]=='\n':
+    while i<l and s[i]=='\n':
         i += 1
+#    print(s[i]=='\n')
 #    print('    end:' + s[i])
     return (i, val)
 
@@ -83,7 +84,7 @@ def _parse_el_attr_key(s, i, l):
     while i<l and not (s[i].isspace() or s[i]=='='):
         key += s[i]
         i += 1
-    if i<l and (s[i]==' ' or s[i] == '\t') and s[i] != '=':
+    while i<l and (s[i]==' ' or s[i] == '\t') and s[i] != '=':
         i += 1
 #    print('end: '+s[i])
 #    print('       ei=' + str(i))
@@ -96,7 +97,7 @@ def _parse_el_nm(s, i, l):
         i += 1
     while i<l and s[i] != '\n':
         i += 1
-    if i<l and s[i]=='\n':
+    while i<l and s[i]=='\n':
         i += 1
     return (i, nm)
 
@@ -115,6 +116,7 @@ def _skip_ind(s, i, l):
     return (i, skipped)
 
 def parse(svl):
+#    print('development')
     arr = []
     i = 0
     l = len(svl)
@@ -141,7 +143,8 @@ def parse(svl):
             i, val = _parse_el_attr_val(svl, i, l, arr)
 #            print('    '+val)
             d[key] = val
-            if i>=l or (i+1<l and not svl[i+1].isspace()):
+#            print(el.name + '.' + key + '=>' + val)
+            if i>=l or not svl[i].isspace():
                 break
 #        print(el.name)
         el.set(d)
